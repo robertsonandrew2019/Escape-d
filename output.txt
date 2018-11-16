@@ -1,0 +1,30 @@
+/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/java "-javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=58226:/Applications/IntelliJ IDEA CE.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath /Users/andrewrobertson/IdeaProjects/Escape'd/out/production/Escape'd Main
+Welcome to INSERT STORY. There is a set of verbs and nouns that will allow you to leave in the format of verb noun, or to move, indicate direction (north, south, east, west).
+
+You find yourself in a large foyer. There is a door to the north. To the west is a bench against the wall. To the east is a chest on the floor. In the center of the room is a large candle. The candle is unlit. You have 30 moves left.
+>>open chest
+There are matches in the chest. You have 29 moves left.
+>>get matches
+You have a box of matches. You have 28 moves left.
+>>light candle
+The candle is lit. You heard a metal grinding sound from the north. You have 27 moves left.
+>>open door
+The north door is open. You have 26 moves left.
+>>north
+You have left the foyer. On your way out, the door slammed and locked. You are now in the library and cannot return to the foyer. In the library there are stacks of books lining the shelves, a desk, a pen, and a scroll. There is another locked door to the north. You have 25 moves left.
+>>get pen
+You have acquired the pen. You have 24 moves left.
+>>write name
+You have completed the autobiography You heard a metal grinding sound from the north. You have 23 moves left.
+>>open door
+The north door is open. You have 22 moves left.
+>>north
+ You have left the library. On your way out, the door slammed and locked. You are now in the conservatory and cannot return to the library. In the conservatory there are there are three instruments: a trumpet, a piano, and a drum. There is a sheet of music on a stand. You have 21 moves left.
+>>play trumpet
+*trumpet noise* You have 20 moves left.
+>>play piano
+*piano noise* You have 19 moves left.
+>>play drum
+
+Congratulations! You have completed the escape room challenge successfully in with 18 moves to spare.
+Process finished with exit code 0
