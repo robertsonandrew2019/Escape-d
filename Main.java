@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.printf("Welcome to INSERT STORY. There is a set of verbs and nouns that will allow you to leave in the format of verb noun, or to move, indicate direction (north, south, east, west).\n\n");
+        System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get), noun (door, room, bench, chest, candle, note, matches, shelves, book, pen, scroll, music, trumpet, piano, drum, lock), or to move, indicate direction (north, south, east, west). Good luck.\n\n");
         for (int i = 1; i < 31; i++) {
             gameUsage();
             movesLeft--;
@@ -190,7 +190,7 @@ public class Main {
         }
     }
 
-    public static void conservatory() {
+    public static void conservatory()  {
         System.out.printf("%s You have %d moves left.\n>>", output, movesLeft);
         scan = new Scanner(System.in);
         String test = scan.nextLine();
