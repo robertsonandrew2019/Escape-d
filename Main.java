@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get), noun (door, room, bench, chest, candle, note, matches, shelves, book, pen, scroll, music, trumpet, piano, drum, lock), or to move, indicate direction (north, south, east, west). Good luck.\n\n");
+        System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get), noun (door, room, bench, chest, candle, note, matches, shelves, book, pen, scroll, music, trumpet, piano, drum, lock), or to move, indicate direction (north, south, east, west). If your move yields no advancement, the previous command will likeley repeat itself. Good luck.\n\n");
         for (int i = 1; i < 31; i++) {
             gameUsage();
             movesLeft--;
@@ -70,7 +70,7 @@ public class Main {
                 break;
 
             case "read note":
-                output = "May my light show you the way.";
+                output = "The note says, 'May my light show you the way.'";
                 break;
 
             case "look chest":
@@ -85,6 +85,15 @@ public class Main {
             case "get matches":
                 hasMatches = true;
                 output = "You have a box of matches.";
+                break;
+
+            case "look candle":
+                if (candleLit) {
+                    output = "The candle is burning, providing some light.";
+                }
+                else {
+                    output = "The candle is unlit";
+                }
                 break;
 
             case "light candle":
@@ -151,9 +160,14 @@ public class Main {
 
             case "write book":
             case "write name":
-                writeBook = true;
-                door2Locked = false;
-                output = "You have completed the autobiography You heard a metal grinding sound from the north.";
+                if (getPen) {
+                    writeBook = true;
+                    door2Locked = false;
+                    output = "You have completed the autobiography You heard a metal grinding sound from the north.";
+                }
+                else {
+                    output = "You don't have anything to write with";
+                }
                 break;
 
             case "look door":
