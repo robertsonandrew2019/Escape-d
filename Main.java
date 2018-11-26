@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get), noun (door, room, bench, chest, candle, note, matches, shelves, book, pen, scroll, music, trumpet, piano, drum, lock), or to move, indicate direction (north, south, east, west). If your move yields no advancement, the previous command will likeley repeat itself. Good luck.\n\n");
+        System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get, go), noun (door, room, bench, chest, candle, note, matches, shelves, book, pen, scroll, music, trumpet, piano, drum, lock) or direction (north, south, east, west). If your move yields no advancement, the previous command will likely repeat itself. Good luck.\n\n");
         for (int i = 1; i < 31; i++) {
             gameUsage();
             movesLeft--;
@@ -133,7 +133,7 @@ public class Main {
                 }
                 break;
 
-            case "north":
+            case "go north":
                 if (door1Open) {
                     inFoyer = false;
                     inLibrary = true;
@@ -196,7 +196,7 @@ public class Main {
                 }
                 break;
 
-            case "north":
+            case "go north":
                 if (door1Open) {
                     inLibrary = false;
                     inConservatory = true;
@@ -253,6 +253,4 @@ public class Main {
                 output = "In the conservatory there are there are three instruments: a trumpet, a piano, and a drum. There is a sheet of music on a stand.";
         }
     }
-}
-
 }
