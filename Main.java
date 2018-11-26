@@ -74,12 +74,17 @@ public class Main {
                 break;
 
             case "look chest":
-                output = "the chest is closed.";
+                if (chestOpen) {
+                    output = "There are matches in the chest.";
+                }
+                else {
+                    output = "the chest is closed.";
+                }
                 break;
 
             case "open chest":
                 chestOpen = true;
-                output = "There are matches in the chest.";
+                output = "Now, the chest is open. What's inside?";
                 break;
 
             case "get matches":
