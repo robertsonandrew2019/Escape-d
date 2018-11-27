@@ -19,6 +19,7 @@ public class Main {
 
     //library conditions
     public static boolean getPen = false;
+    public static boolean getBook = false;
     public static boolean writeBook = false;
     public static boolean door2Locked = true;
     public static boolean door2Open = false;
@@ -30,7 +31,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get, go), noun (door, room, bench, chest, candle, note, matches, shelves, book, pen, scroll, music, trumpet, piano, drum, lock) or direction (north, south, east, west). If your move yields no advancement, the previous command will likely repeat itself. Good luck.\n\n");
+        System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get, go), noun (door, room, bench, chest, candle, note, matches, bookshelf, book, pen, scroll, music, trumpet, piano, drum, lock) or direction (north, south, east, west). If your move yields no advancement, the previous command will likely repeat itself. Good luck.\n\n");
         for (int i = 1; i < 31; i++) {
             gameUsage();
             movesLeft--;
@@ -39,7 +40,7 @@ public class Main {
             }
         }
         if (playTrumpet && playPiano && playDrum) {
-            System.out.printf("\nCongratulations! You have completed the escape room challenge successfully in with %d moves to spare.", movesLeft);
+            System.out.printf("\nCongratulations! You have completed the escape room challenge successfully in with %d moves to spare.\n", movesLeft);
         }
         else {
             System.out.printf("\nYou have failed the escape room challenge. Try again!");
@@ -131,6 +132,9 @@ public class Main {
                     door1Open = true;
                     output = "The north door is open.";
                 }
+                else {
+                    output = "The door is locked.";
+                }
                 break;
 
             case "go north":
@@ -139,7 +143,14 @@ public class Main {
                     inLibrary = true;
                     output = "You have left the foyer. On your way out, the door slammed and locked. You are now in the library and cannot return to the foyer. In the library there are stacks of books lining the shelves, a desk, a pen, and a scroll. There is another locked door to the north.";
                 }
+                else {
+                    output = "The door is closed.";
+                }
                 break;
+
+            default :
+                output = "There is a door to the north. To the west is a bench against the wall. To the east is a chest on the floor. In the center of the room is a large candle.";
+            break;
         }
     }
 
@@ -163,15 +174,25 @@ public class Main {
                 output = "the scroll says, 'Share your story.'";
                 break;
 
+            case "get book":
+                if (getBook) {
+                    output = "You already have the book. Get busy writing.";
+                }
+                else {
+                    output = "You now have the blank book. Time to get creative.";
+                    getBook = true;
+                }
+                break;
+
             case "write book":
             case "write name":
-                if (getPen) {
+                if (getPen && getBook) {
                     writeBook = true;
                     door2Locked = false;
                     output = "You have completed the autobiography You heard a metal grinding sound from the north.";
                 }
                 else {
-                    output = "You don't have anything to write with";
+                    output = "Get everything you need to write.";
                 }
                 break;
 
@@ -216,36 +237,45 @@ public class Main {
 
         switch (test) {
             case "read music":
-                output = "Timbre, Tone, Time";
+                output = "'Timbre, Tone, Time.'";
                 break;
 
             case "play trumpet":
                 if (!playPiano && !playDrum) {
                     playTrumpet = true;
-                    output = "*trumpet noise*";
+                    output = "Good thing you can play the trumpet. That was a perfect timbre.";
                 }
                 else {
                     output = "Hmm... Something seems to be wrong with the trumpet. It isn't playing correctly.";
+                    playTrumpet = false;
+                    playPiano = false;
+                    playDrum = false;
                 }
                 break;
 
             case "play piano":
                 if (playTrumpet && !playDrum) {
                     playPiano = true;
-                    output = "*piano noise*";
+                    output = "Good thing you can play the piano. That was a perfect tone.";
                 }
                 else {
                     output = "Hmm... Something seems to be wrong with the piano. It isn't playing correctly.";
+                    playTrumpet = false;
+                    playPiano = false;
+                    playDrum = false;
                 }
                 break;
 
             case "play drum":
                 if (playTrumpet && playPiano) {
                     playDrum = true;
-                    output = "*drum noise*";
+                    output = "Good thing you can play the drums. That was a perfect time.";
                 }
                 else {
                     output = "Hmm... Something seems to be wrong with the drum. It isn't playing correctly.";
+                    playTrumpet = false;
+                    playPiano = false;
+                    playDrum = false;
                 }
                 break;
 
