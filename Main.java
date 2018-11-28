@@ -19,7 +19,6 @@ public class Main {
 
     //library conditions
     public static boolean getPen = false;
-    public static boolean getBook = false;
     public static boolean writeBook = false;
     public static boolean door2Locked = true;
     public static boolean door2Open = false;
@@ -28,19 +27,22 @@ public class Main {
     public static boolean playTrumpet = false;
     public static boolean playPiano = false;
     public static boolean playDrum = false;
+    public static boolean door3Locked = true;
+    public static boolean door3Open = false;
+    public static boolean completion = false;
 
     public static void main(String[] args) {
 
         System.out.printf("Welcome to The House. You have 30 moves to escape. There is a set of verbs and nouns that will allow you to leave in the format of verb (open, close, light, read, write, play, look, get, go), noun (door, room, bench, chest, candle, note, matches, bookshelf, book, pen, scroll, music, trumpet, piano, drum, lock) or direction (north, south, east, west). If your move yields no advancement, the previous command will likely repeat itself. Good luck.\n\n");
-        for (int i = 1; i < 31; i++) {
+        for (int i = 0; i < 30; i++) {
             gameUsage();
             movesLeft--;
-            if (playTrumpet && playPiano && playDrum) {
+            if (completion) {
                 break;
             }
         }
-        if (playTrumpet && playPiano && playDrum) {
-            System.out.printf("\nCongratulations! You have completed the escape room challenge successfully in with %d moves to spare.\n", movesLeft);
+        if (completion) {
+            System.out.printf("Your musical talent is amazing! What a time we've had. You have completed the escape room challenge successfully with %d moves to spare.\n", movesLeft);
         }
         else {
             System.out.printf("\nYou have failed the escape room challenge. Try again!");
@@ -63,6 +65,7 @@ public class Main {
         System.out.printf("%s You have %d moves left.\n>>", output, movesLeft);
         scan = new Scanner(System.in);
         String test = scan.nextLine();
+        System.out.println();
 
         switch (test) {
 
@@ -89,8 +92,13 @@ public class Main {
                 break;
 
             case "get matches":
-                hasMatches = true;
-                output = "You have a box of matches.";
+                if (chestOpen) {
+                    hasMatches = true;
+                    output = "You have a box of matches.";
+                }
+                else {
+                    output = "There aren't any matches.";
+                }
                 break;
 
             case "look candle":
@@ -158,11 +166,22 @@ public class Main {
         System.out.printf("%s You have %d moves left.\n>>", output, movesLeft);
         scan = new Scanner(System.in);
         String test = scan.nextLine();
+        System.out.println();
 
         switch (test) {
 
+            case "look shelf":
+            case "look shelves":
             case "look bookshelf":
                 output = "There is a book titled 'The Autobiography of ...' with the rest of the title empty.";
+                break;
+
+            case "look book":
+                output = "There is a book titled 'The Autobiography of ...' with the rest of the title empty.";
+                break;
+
+            case "look pen":
+                output = "Hmm... That's a good looking pen.";
                 break;
 
             case "get pen":
@@ -171,22 +190,13 @@ public class Main {
                 break;
 
             case "read scroll":
+            case "look scroll":
                 output = "the scroll says, 'Share your story.'";
                 break;
 
-            case "get book":
-                if (getBook) {
-                    output = "You already have the book. Get busy writing.";
-                }
-                else {
-                    output = "You now have the blank book. Time to get creative.";
-                    getBook = true;
-                }
-                break;
 
             case "write book":
-            case "write name":
-                if (getPen && getBook) {
+                if (getPen) {
                     writeBook = true;
                     door2Locked = false;
                     output = "You have completed the autobiography You heard a metal grinding sound from the north.";
@@ -215,13 +225,19 @@ public class Main {
                     door2Open = true;
                     output = "The north door is open.";
                 }
+                else {
+                    output = "The door is locked.";
+                }
                 break;
 
             case "go north":
-                if (door1Open) {
+                if (door2Open) {
                     inLibrary = false;
                     inConservatory = true;
-                    output = " You have left the library. On your way out, the door slammed and locked. You are now in the conservatory and cannot return to the library. In the conservatory there are there are three instruments: a trumpet, a piano, and a drum. There is a sheet of music on a stand.";
+                    output = "You have left the library. On your way out, the door slammed and locked. You are now in the conservatory and cannot return to the library. In the conservatory there are there are three instruments: a trumpet, a piano, and a drum. There is a sheet of music on a stand.";
+                }
+                else {
+                    output = "the door is closed.";
                 }
                 break;
 
@@ -234,6 +250,7 @@ public class Main {
         System.out.printf("%s You have %d moves left.\n>>", output, movesLeft);
         scan = new Scanner(System.in);
         String test = scan.nextLine();
+        System.out.println();
 
         switch (test) {
             case "read music":
@@ -256,7 +273,7 @@ public class Main {
             case "play piano":
                 if (playTrumpet && !playDrum) {
                     playPiano = true;
-                    output = "Good thing you can play the piano. That was a perfect tone.";
+                    output = "Wow, that was a perfect tone. Good job!";
                 }
                 else {
                     output = "Hmm... Something seems to be wrong with the piano. It isn't playing correctly.";
@@ -269,7 +286,8 @@ public class Main {
             case "play drum":
                 if (playTrumpet && playPiano) {
                     playDrum = true;
-                    output = "Good thing you can play the drums. That was a perfect time.";
+                    door3Locked = false;
+                    output = "Nice, time. I think I heard an unlocking noise to the north.";
                 }
                 else {
                     output = "Hmm... Something seems to be wrong with the drum. It isn't playing correctly.";
@@ -279,8 +297,29 @@ public class Main {
                 }
                 break;
 
+            case "open door":
+                if (!door3Locked) {
+                    door3Open = true;
+                    output = "The door is open. Looks like freedom to me.";
+                }
+                else {
+                    output = "The door is locked.";
+                }
+                break;
+
+            case "go north":
+                if (door3Open) {
+                    completion = true;
+                }
+                else {
+                    output = "The door is closed.";
+                }
+                break;
+
+
             default:
                 output = "In the conservatory there are there are three instruments: a trumpet, a piano, and a drum. There is a sheet of music on a stand.";
+                break;
         }
     }
 }
